@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {# bootstrap #}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    {# bootstrap-theme #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/css/ripples.min.css">
+
+    {# font-awesome #}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{{ asset('css/vendor/sidebar.css') }}">
+
+    {% block style %}{% endblock %}
+  </head>
+  <body>
+    {% block navbar %}{% endblock %}
+    <div class="container">
+      <div class="row" style="margin-bottom: 20px">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+      </div>
+    </div>
+    {% block footer %}{% endblock %}
+    {% block sidebar %}{% endblock %}
+
+    {# jquery #}
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    {# bootstrap.js #}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    {# bootstrap-theme.js #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/js/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/js/ripples.min.js"></script>
+
+    {% block javascripts %}{% endblock %}
+  </body>
 </html>

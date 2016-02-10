@@ -15,8 +15,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $name = $request->query->get('name');
+        $name = $request->query->get('name', 'world');
 
-        return new Response('hi ' . $name);
+        return $this->render('default/portal.html.twig', ['name' => $name]);
     }
 }
