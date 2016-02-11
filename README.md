@@ -1,15 +1,25 @@
 # symfony3-demo
 
+[![Build Status](https://travis-ci.org/squarer/symfony3-demo.svg?branch=master)](https://travis-ci.org/squarer/symfony3-demo)
+
 ### Install Dependencies
 ``` bash
-$ composer install
+./bin/setup.sh
 ```
-Put [SMTB/smt-bootstrap.css](https://raw.githubusercontent.com/cblweb/semantic-ui-bootstrap/master/css/smt-bootstrap.css) in `web/vendor/css/smt-bootstrap.css`
 
 ### Running the App
 ``` bash
 $ php bin/console server:run
 ```
 Application start at `localhost:8000`
+
+### Tests
+``` bash
+$ phpunit tests/
+```
+get coverage report
+``` bash
+$ phpunit --coverage-html=path/to/coverage tests/
+```
 
 ### [Demo](http://52.25.204.72/)
