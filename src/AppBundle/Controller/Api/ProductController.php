@@ -127,6 +127,27 @@ class ProductController extends Controller
     }
 
     /**
+     * @Route("/product/list",
+     *        name = "api_product_list",
+     *        requirements = {"_format" = "json"},
+     *        defaults = {"_format" = "json"})
+     * @Method({"GET"})
+     *
+     * @return JsonResponse
+     */
+    public function listAction()
+    {
+        $fakeOutput = [
+            ['name' => 'user1'],
+            ['name' => 'user2'],
+            ['name' => 'user3'],
+            ['name' => 'user4']
+        ];
+
+        return new JsonResponse($fakeOutput);
+    }
+
+    /**
      * @param integer $productId
      * @return Product
      */

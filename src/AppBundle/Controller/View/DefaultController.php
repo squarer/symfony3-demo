@@ -13,10 +13,12 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $name = $request->query->get('name', 'world');
+        $productController = $this->get('app.product_api');
+        $response = $productController->listAction();
+        $products = json_decode($response->getContent(), true);
 
-        return $this->render('default/portal.html.twig', ['name' => $name]);
+        return $this->render('default/portal.html.twig', ['products' => $products]);
     }
 }

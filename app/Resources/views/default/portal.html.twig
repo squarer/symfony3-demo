@@ -3,5 +3,10 @@
 {% block title %}homepage{% endblock %}
 
 {% block body %}
-  <div class="col-md-12">hello, {{ name }}</div>
+  <h3 class="col-md-12">hello, world</h3>
+  {% for product in products %}
+    <div class="col-md-3 col-sm-6">
+      {% include 'default/product.html.twig' with { 'product': product } %}
+    </div>
+  {% endfor %}
 {% endblock %}

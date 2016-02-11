@@ -8,3 +8,6 @@ services:
         class: AppBundle\EventListener\ExceptionListener
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+
+    app.product_api:
+        class: AppBundle\Controller\Api\ProductController

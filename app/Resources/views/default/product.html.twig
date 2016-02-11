@@ -1,0 +1,14 @@
+{% set url = "https://assets.imgix.net/unsplash/#{random(['paperlamp', 'motorbike', 'pineneedles', 'turntable'])}.jpg?fm=pjpg&w=300&h=200" %}
+<div class="bs-component">
+  <div class="card">
+    <div class="card-content">
+      <div class="pull-right">14h</div><img class="card-avatar card-image" src="{{ url }}"> {{ product.name }}</div>
+    <div class="card-image">
+      <img src="{{ url }}">
+    </div>
+    <div class="card-content">
+      <span class="pull-right"><i class="fa fa-heart"></i> 17 likes </span>
+      <i class="fa fa-comment"></i> 3 comments
+    </div>
+  </div>
+</div>
