@@ -1,3 +1,4 @@
 language: php
-before_script: ./bin/setup.sh
+services: redis-server
+install: ./bin/setup.sh
 script: phpunit
