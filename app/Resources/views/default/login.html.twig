@@ -2,13 +2,46 @@
 
 {% block title %}login{% endblock %}
 
+{% block javascripts %}
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: {{ fb_app_id }},
+        cookie: true,
+        version: 'v2.5'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/zh_TW/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+    function logInWithFacebook() {
+      FB.login(function(response) {
+        var url = "{{ path('callback') }}";
+        window.location.replace(url);
+      }, {scope: 'email'});
+    }
+
+    $('#fbLogin').on('click', function() {
+      $(this).button('loading');
+      logInWithFacebook();
+    });
+  </script>
+{% endblock %}
+
 {% block body %}
   <div class="page-header">
     <h3>Sign in</h3>
   </div>
   <div class="col-sm-8 col-sm-offset-2">
-    <a class="btn btn-block btn-lg btn-social btn-facebook">
-      <span class="fa fa-facebook"></span> Sign in with Facebook
+    <a id="fbLogin" class="btn btn-block btn-lg btn-social btn-facebook" data-loading-text="<span class='fa fa-facebook'></span> Connecting...">
+      <span class="fa fa-facebook"></span>
+      <span>Sign in with Facebook</span>
     </a>
     <div class="bs-divider">Or</div>
     <form>

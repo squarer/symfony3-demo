@@ -28,7 +28,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "snc/redis-bundle": "2.x-dev",
-        "predis/predis": "^1.0"
+        "predis/predis": "^1.0",
+        "facebook/php-sdk-v4": "^5.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

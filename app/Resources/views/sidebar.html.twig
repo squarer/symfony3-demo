@@ -11,7 +11,18 @@
           <li><a href="javascript:void(0)">Something else here</a></li>
         </ul>
       </li>
-      <li><a class="withripple" href="{{ path('login') }}">Login</a></li>
+      {% if hasSession(app.request.cookies.get('session_id')) %}
+        {% set userInfo = userInfo(app.request.cookies.get('session_id')) %}
+        <li class="dropdown">
+          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle withripple" data-toggle="dropdown">
+            {{ userInfo.name }}</a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('logout')}}">Sign out</a></li>
+          </ul>
+        </li>
+      {% else %}
+        <li><a class="withripple" href="{{ path('login') }}">Login</a></li>
+      {% endif %}
     </ul>
   </div>
 </div>

@@ -37,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        fb_app_id: "%fb_app_id%"
 
 # Doctrine Configuration
 doctrine:

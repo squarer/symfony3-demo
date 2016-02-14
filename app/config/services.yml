@@ -11,3 +11,10 @@ services:
 
     app.product_api:
         class: AppBundle\Controller\Api\ProductController
+
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        calls:
+            - [ setRedis, [ '@snc_redis.default' ] ]
+        tags:
+            - { name: twig.extension }

@@ -20,3 +20,6 @@ parameters:
 
     redis_host:        127.0.0.1
     redis_port:        6379
+
+    fb_app_id: ~
+    fb_app_secret: ~

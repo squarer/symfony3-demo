@@ -18,7 +18,19 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ path('login') }}">Login</a></li>
+        {% if hasSession(app.request.cookies.get('session_id')) %}
+          {% set userInfo = userInfo(app.request.cookies.get('session_id')) %}
+          <li class="dropdown">
+            <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+              {{ userInfo.name }} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-header">{{ userInfo.email }}</li>
+              <li><a href="{{ path('logout')}}">Sign out</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{{ path('login') }}">Login</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
