@@ -16,12 +16,15 @@
     {# font-awesome #}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+    {# social button #}
+    <link rel="stylesheet" href="{{ asset('vendor/css/bootstrap-social.css') }}">
+
     {% block style %}{% endblock %}
   </head>
   <body>
     {% block navbar %}{% endblock %}
     <div class="container">
-      <div class="row" style="margin-bottom: 20px">
+      <div style="margin-bottom: 20px">
         {% block body %}{% endblock %}
       </div>
     </div>
