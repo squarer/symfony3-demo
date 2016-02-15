@@ -3,6 +3,7 @@
 {% block title %}login{% endblock %}
 
 {% block javascripts %}
+  {{ parent() }}
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -31,6 +32,8 @@
       $(this).button('loading');
       logInWithFacebook();
     });
+
+    $('#login').addClass('active');
   </script>
 {% endblock %}
 

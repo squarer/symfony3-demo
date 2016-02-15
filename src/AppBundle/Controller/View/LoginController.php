@@ -14,8 +14,12 @@ class LoginController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        if ($this->validateCookie($request)) {
+            return $this->redirectToRoute('homepage');
+        }
+
         return $this->render('default/login.html.twig');
     }
 
@@ -71,5 +75,16 @@ class LoginController extends Controller
         $expired = time() + 86400 * 30;
         $response->headers->setCookie(new Cookie('session_id', $sessionId, $expired));
         $response->sendHeaders();
+    }
+
+    /**
+     * @param Request $request
+     * @return boolean
+     */
+    private function validateCookie($request)
+    {
+        $sessionId = $request->cookies->get('session_id');
+
+        return $this->get('app.twig_extension')->hasSession($sessionId);
     }
 }

@@ -1,11 +1,11 @@
-<div class="navbar navbar-warning">
+<div class="navbar navbar-default" style="background-color:#fff">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" id="sidebarToggle"><i class="fa fa-bars"></i></a>
     </div>
-    <div class="navbar-collapse collapse navbar-warning-collapse">
+    <div class="navbar-collapse collapse navbar-default-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{{ path('homepage') }}">305</a></li>
+        <li id="brand"><a href="{{ path('homepage') }}">305</a></li>
         <li><a href="javascript:void(0)">Link</a></li>
         <li class="dropdown">
           <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
@@ -29,7 +29,7 @@
             </ul>
           </li>
         {% else %}
-          <li><a href="{{ path('login') }}">Login</a></li>
+          <li id="login"><a href="{{ path('login') }}">Login</a></li>
         {% endif %}
       </ul>
     </div>

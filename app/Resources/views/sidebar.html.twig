@@ -1,6 +1,6 @@
 <div id="body-sidebar-left" class="sidebar">
   <div class="sidebar-wrap">
-    <div class="sidebar-subject">305</div>
+    <div class="sidebar-subject"><a href="{{ path('homepage') }}">305</a></div>
     <ul>
       <li><a class="withripple" href="javascript:void(0)">Link</a></li>
       <li class="dropdown">
@@ -13,13 +13,8 @@
       </li>
       {% if hasSession(app.request.cookies.get('session_id')) %}
         {% set userInfo = userInfo(app.request.cookies.get('session_id')) %}
-        <li class="dropdown">
-          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle withripple" data-toggle="dropdown">
-            {{ userInfo.name }}</a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('logout')}}">Sign out</a></li>
-          </ul>
-        </li>
+        <li><a href="javascript:void(0)" class="withripple">{{ userInfo.name }}</a></li>
+        <li><a href="{{ path('logout')}}" class="withripple">Sign out</a></li>
       {% else %}
         <li><a class="withripple" href="{{ path('login') }}">Login</a></li>
       {% endif %}

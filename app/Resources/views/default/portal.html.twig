@@ -2,6 +2,14 @@
 
 {% block title %}homepage{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script>
+    $('#brand').addClass('active');
+  </script>
+{% endblock %}
+
+
 {% block body %}
   <h3 class="col-md-12">hello, world</h3>
   {% for product in products %}

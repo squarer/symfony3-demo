@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block style %}
+  <style>
+    .navbar .nav > .active > a {
+      background: none;
+      border-bottom: 1px solid blue;
+    }
+  </style>
+{% endblock %}
+
 {% block navbar %}
   {% include 'navbar.html.twig' %}
 {% endblock %}
