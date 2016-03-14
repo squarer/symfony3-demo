@@ -7,16 +7,29 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
 
 class UserController extends Controller
 {
 
     /**
-     * @Route("/user/{userId}/friends")
+     * @Route("/user/{userId}/friends",
      *        name = "api_user_friend_list",
      *        requirements = {"userId" = "\d+", "_format" = "json"},
-     *        default = {"_format" = "json"})
+     *        defaults = {"_format" = "json"})
      * @Method({"GET"})
+     *
+     * @ApiDoc(
+     *  description="取得魅友列表",
+     *  requirements={
+     *      {
+     *          "name"="userId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="要操作的會員編號"
+     *      }
+     *  })
      *
      * @return JsonResponse
      */
@@ -35,11 +48,28 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friend/{friendId}/add")
+     * @Route("/user/{userId}/friend/{friendId}",
      *        name = "api_user_add_friend",
      *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
-     *        default = {"_format" = "json"})
-     * @Method({"PUT"})
+     *        defaults = {"_format" = "json"})
+     * @Method({"POST"})
+     *
+     * @ApiDoc(
+     *  description="加魅友",
+     *  requirements={
+     *      {
+     *          "name"="userId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="會員編號"
+     *      },
+     *      {
+     *          "name"="friendId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="好友編號"
+     *      }
+     *  })
      *
      * @return JsonResponse
      */
@@ -48,7 +78,7 @@ class UserController extends Controller
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => '14232424', 'modified_time' => '2016-03-03 12:00:00']
+                ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
             ]
         ];
 
@@ -56,11 +86,28 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friend/{friendId}/cancel")
+     * @Route("/user/{userId}/friend/{friendId}",
      *        name = "api_user_cancel_friend",
      *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
-     *        default = {"_format" = "json"})
-     * @Method({"PUT"})
+     *        defaults = {"_format" = "json"})
+     * @Method({"DELETE"})
+     *
+     * @ApiDoc(
+     *  description="移除魅友",
+     *  requirements={
+     *      {
+     *          "name"="userId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="會員編號"
+     *      },
+     *      {
+     *          "name"="friendId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="好友編號"
+     *      }
+     *  })
      *
      * @return JsonResponse
      */
@@ -69,7 +116,7 @@ class UserController extends Controller
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => '13131312', 'modified_time' => '2016-03-03 12:00:00']
+                ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
             ]
         ];
 

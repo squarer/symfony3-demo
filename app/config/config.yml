@@ -76,3 +76,5 @@ snc_redis:
             type: predis
             alias: default
             dsn: "redis://%redis_host%:%redis_port%"
+
+nelmio_api_doc: ~
