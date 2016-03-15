@@ -49,7 +49,7 @@ class FollowerController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/followers/{followerId}",
+     * @Route("/user/{userId}/follow/{followerId}",
      *        name = "api_follow",
      *        requirements = {"userId" = "\d+", "followerId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
@@ -88,8 +88,8 @@ class FollowerController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/followers/{followerId}",
-     *        name = "api_user_cancel_follower",
+     * @Route("/user/{userId}/follow/{followerId}",
+     *        name = "api_unfollow",
      *        requirements = {"userId" = "\d+", "followerId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"DELETE"})

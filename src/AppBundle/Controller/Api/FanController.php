@@ -49,7 +49,7 @@ class FanController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/fans/{fanId}",
+     * @Route("/user/{userId}/collect/{fanId}",
      *        name = "api_collect",
      *        requirements = {"userId" = "\d+", "fanId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
