@@ -1,6 +1,7 @@
 AppBundle\Entity\Follow:
     type: entity
     table: follow
+    repositoryClass: AppBundle\Repository\FollowRepository
     id:
         followerId:
             type: bigint

@@ -2,8 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Follow
+ *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FollowRepository")
  */
 class Follow
 {
@@ -190,5 +194,17 @@ class Follow
     public function getIsValid()
     {
         return $this->isValid;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'followed_id' => $this->getFollowedId(),
+            'follower_id' => $this->getFollowerId(),
+            'modified_time' => $this->getModifiedTime()
+        ];
     }
 }

@@ -37,13 +37,12 @@ class FollowController extends Controller
      */
     public function followedListAction($userId)
     {
+        $em = $this->getEntityManager();
+        $list = $em->getRepository('AppBundle:Follow')->getFollowedList($userId);
+
         $output = [
             'result' => 'ok',
-            'data' => [
-                ['user_id' => '12345678', 'modified_time' => '2016-03-01 12:00:00'],
-                ['user_id' => '13131312', 'modified_time' => '2016-03-02 12:00:00'],
-                ['user_id' => '14232424', 'modified_time' => '2016-03-03 12:00:00']
-            ]
+            'data' => $list
         ];
 
         return new JsonResponse($output);
@@ -72,13 +71,12 @@ class FollowController extends Controller
      */
     public function fanListAction($userId)
     {
+        $em = $this->getEntityManager();
+        $list = $em->getRepository('AppBundle:Follow')->getFansList($userId);
+
         $output = [
             'result' => 'ok',
-            'data' => [
-                ['user_id' => '12345678', 'modified_time' => '2016-03-01 12:00:00'],
-                ['user_id' => '13131312', 'modified_time' => '2016-03-02 12:00:00'],
-                ['user_id' => '14232424', 'modified_time' => '2016-03-03 12:00:00']
-            ]
+            'data' => $list
         ];
 
         return new JsonResponse($output);
