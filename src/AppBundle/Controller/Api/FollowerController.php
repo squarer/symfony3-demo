@@ -174,10 +174,27 @@ class FollowerController extends Controller
      */
     public function unFollowAction($userId, $followedId)
     {
+        $em = $this->getEntityManager();
+        $follow = $em->find('AppBundle:Follow',
+            ['followerId' => $userId, 'followedId' => $followedId]);
+
+        if (!$follow) {
+            throw new \RuntimeException('No relation found');
+        }
+
+        if ($follow->getIsValid()) {
+            $follow->setIsValid(false)
+                ->setModifiedTime(new \DateTime())
+                ->setLastestEditor($userId);
+        }
+
+        $em->flush();
+
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $followedId, 'modified_time' => '2016-03-03 12:00:00']
+                'user_id' => $follow->getFollowedId(),
+                'modified_time' => $follow->getModifiedTime()
             ]
         ];
 
