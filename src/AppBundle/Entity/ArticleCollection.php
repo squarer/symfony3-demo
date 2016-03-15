@@ -182,4 +182,3 @@ class ArticleCollection
         return $this->isValid;
     }
 }
-

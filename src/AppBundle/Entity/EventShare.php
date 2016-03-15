@@ -182,4 +182,3 @@ class EventShare
         return $this->isValid;
     }
 }
-

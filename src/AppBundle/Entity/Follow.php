@@ -192,4 +192,3 @@ class Follow
         return $this->isValid;
     }
 }
-

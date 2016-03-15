@@ -182,4 +182,3 @@ class ArticleTag
         return $this->isVaild;
     }
 }
-

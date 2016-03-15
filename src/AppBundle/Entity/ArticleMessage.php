@@ -255,4 +255,3 @@ class ArticleMessage
         return $this->isValid;
     }
 }
-

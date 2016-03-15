@@ -182,4 +182,3 @@ class EventBrowse
         return $this->isValid;
     }
 }
-

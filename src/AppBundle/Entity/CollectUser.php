@@ -182,4 +182,3 @@ class CollectUser
         return $this->isValid;
     }
 }
-

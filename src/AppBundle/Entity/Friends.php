@@ -255,4 +255,3 @@ class Friends
         return $this->isValid;
     }
 }
-

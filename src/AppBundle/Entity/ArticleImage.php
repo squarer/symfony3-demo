@@ -197,4 +197,3 @@ class ArticleImage
         return $this->isVaild;
     }
 }
-

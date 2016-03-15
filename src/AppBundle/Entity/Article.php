@@ -400,4 +400,3 @@ class Article
         return $this->isValid;
     }
 }
-

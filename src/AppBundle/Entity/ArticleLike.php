@@ -182,4 +182,3 @@ class ArticleLike
         return $this->isValid;
     }
 }
-

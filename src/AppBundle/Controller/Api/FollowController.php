@@ -11,7 +11,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use AppBundle\Entity\Follow;
 
 
-class FollowerController extends Controller
+class FollowController extends Controller
 {
 
     /**

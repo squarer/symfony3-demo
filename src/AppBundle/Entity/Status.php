@@ -284,4 +284,3 @@ class Status
         return $this->isVaild;
     }
 }
-
