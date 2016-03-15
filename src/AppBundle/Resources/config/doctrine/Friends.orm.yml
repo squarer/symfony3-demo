@@ -1,0 +1,54 @@
+AppBundle\Entity\Friends:
+    type: entity
+    table: friends
+    id:
+        objectId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: object_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        userOneId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: user_one_id
+        userTwoId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: user_two_id
+        actionUserId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: action_user_id
+        status:
+            type: boolean
+            nullable: false
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        lastestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: lastest_editor
+        isValid:
+            type: boolean
+            nullable: false
+            column: is_valid
+    lifecycleCallbacks: {  }

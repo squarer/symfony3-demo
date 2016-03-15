@@ -2,42 +2,35 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * @ORM\Entity
- * @ORM\Table(name="product")
+ * Product
  */
 class Product
 {
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer
      */
-    protected $id;
+    private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
      */
-    protected $name;
+    private $name;
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @var string
      */
-    protected $price;
+    private $price;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
      */
-    protected $description;
+    private $description;
 
-    public function __construct()
-    {
-        $this->description = '';
-    }
 
     /**
+     * Get id
+     *
      * @return integer
      */
     public function getId()
@@ -46,6 +39,10 @@ class Product
     }
 
     /**
+     * Set name
+     *
+     * @param string $name
+     *
      * @return Product
      */
     public function setName($name)
@@ -56,6 +53,8 @@ class Product
     }
 
     /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -64,6 +63,10 @@ class Product
     }
 
     /**
+     * Set price
+     *
+     * @param string $price
+     *
      * @return Product
      */
     public function setPrice($price)
@@ -74,7 +77,9 @@ class Product
     }
 
     /**
-     * @return flaot
+     * Get price
+     *
+     * @return string
      */
     public function getPrice()
     {
@@ -82,6 +87,10 @@ class Product
     }
 
     /**
+     * Set description
+     *
+     * @param string $description
+     *
      * @return Product
      */
     public function setDescription($description)
@@ -92,23 +101,13 @@ class Product
     }
 
     /**
+     * Get description
+     *
      * @return string
      */
     public function getDescription()
     {
         return $this->description;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return [
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'price' => $this->getPrice(),
-            'description' => $this->getDescription()
-        ];
-    }
 }
+

@@ -1,0 +1,38 @@
+AppBundle\Entity\CollectUser:
+    type: entity
+    table: collect_user
+    id:
+        userId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: user_id
+        collectUserId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: collect_user_id
+    fields:
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        lastestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: lastest_editor
+        isValid:
+            type: boolean
+            nullable: false
+            column: is_valid
+    lifecycleCallbacks: {  }

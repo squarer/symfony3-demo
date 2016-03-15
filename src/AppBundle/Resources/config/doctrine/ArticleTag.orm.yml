@@ -1,0 +1,38 @@
+AppBundle\Entity\ArticleTag:
+    type: entity
+    table: article_tag
+    id:
+        articleId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: article_id
+        tagId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: tag_id
+    fields:
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        latestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: latest_editor
+        isVaild:
+            type: boolean
+            nullable: false
+            column: is_vaild
+    lifecycleCallbacks: {  }

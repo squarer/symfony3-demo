@@ -1,0 +1,39 @@
+AppBundle\Entity\EventBrowse:
+    type: entity
+    table: event_browse
+    id:
+        eventId:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            id: true
+            column: event_id
+        userId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: user_id
+    fields:
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        lastestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: lastest_editor
+        isValid:
+            type: boolean
+            nullable: false
+            column: is_valid
+    lifecycleCallbacks: {  }

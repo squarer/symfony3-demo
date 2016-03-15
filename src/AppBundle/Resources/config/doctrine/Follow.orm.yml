@@ -1,0 +1,38 @@
+AppBundle\Entity\Follow:
+    type: entity
+    table: follow
+    id:
+        followerId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: follower_id
+        followedId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: followed_id
+    fields:
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        lastestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: lastest_editor
+        isValid:
+            type: boolean
+            nullable: false
+            column: is_valid
+    lifecycleCallbacks: {  }

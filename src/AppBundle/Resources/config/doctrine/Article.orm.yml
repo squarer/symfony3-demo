@@ -1,0 +1,83 @@
+AppBundle\Entity\Article:
+    type: entity
+    table: article
+    id:
+        articleId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: article_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        userId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: user_id
+        title:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        status:
+            type: boolean
+            nullable: false
+        content:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        featureImage:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: feature_image
+        eventStartDate:
+            type: datetime
+            nullable: false
+            column: event_start_date
+        eventEndDate:
+            type: datetime
+            nullable: false
+            column: event_end_date
+        eventLocation:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: event_location
+        eventOwner:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: event_owner
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        lastestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: lastest_editor
+        isValid:
+            type: boolean
+            nullable: false
+            column: is_valid
+    lifecycleCallbacks: {  }

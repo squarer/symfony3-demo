@@ -1,0 +1,60 @@
+AppBundle\Entity\Status:
+    type: entity
+    table: status
+    id:
+        statusId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: status_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        articleId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: article_id
+        receiverId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: receiver_id
+        userId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: user_id
+        followUserId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: follow_user_id
+        type:
+            type: boolean
+            nullable: false
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        latestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: latest_editor
+        isVaild:
+            type: boolean
+            nullable: false
+            column: is_vaild
+    lifecycleCallbacks: {  }

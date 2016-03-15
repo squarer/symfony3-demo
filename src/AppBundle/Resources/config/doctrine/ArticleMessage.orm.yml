@@ -1,0 +1,57 @@
+AppBundle\Entity\ArticleMessage:
+    type: entity
+    table: article_message
+    id:
+        messageId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: message_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        articleId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: article_id
+        userId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: user_id
+        replyMessageId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: reply_message_id
+        content:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        createdTime:
+            type: datetime
+            nullable: false
+            column: created_time
+        modifiedTime:
+            type: datetime
+            nullable: false
+            column: modified_time
+        lastestEditor:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: lastest_editor
+        isValid:
+            type: boolean
+            nullable: false
+            column: is_valid
+    lifecycleCallbacks: {  }
