@@ -48,7 +48,7 @@ class FriendController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friend/{friendId}",
+     * @Route("/user/{userId}/friends/{friendId}",
      *        name = "api_user_add_friend",
      *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
@@ -86,7 +86,7 @@ class FriendController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friend/{friendId}",
+     * @Route("/user/{userId}/friends/{friendId}",
      *        name = "api_user_cancel_friend",
      *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
@@ -117,6 +117,38 @@ class FriendController extends Controller
             'result' => 'ok',
             'data' => [
                 ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
+            ]
+        ];
+
+        return new JsonResponse($output);
+    }
+
+    /**
+     * @Route("/user/{userId}/friends_count",
+     *        name = "api_user_friend_count",
+     *        requirements = {"userId" = "\d+", "_format" = "json"},
+     *        defaults = {"_format" = "json"})
+     * @Method({"GET"})
+     *
+     * @ApiDoc(
+     *  description="取得魅友數量",
+     *  requirements={
+     *      {
+     *          "name"="userId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="會員編號"
+     *      }
+     *  })
+     *
+     * @return JsonResponse
+     */
+    public function countFriendAction($userId)
+    {
+        $output = [
+            'result' => 'ok',
+            'data' => [
+                ['count' => 20]
             ]
         ];
 
