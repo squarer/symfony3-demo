@@ -10,19 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 
-class FriendController extends Controller
+class FollowerController extends Controller
 {
 
     /**
-     * @Route("/user/{userId}/friends",
-     *        name = "api_friend_list",
+     * @Route("/user/{userId}/followers",
+     *        name = "api_follower_list",
      *        requirements = {"userId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"GET"})
      *
      * @ApiDoc(
-     *  section="Friends",
-     *  description="取得魅友列表",
+     *  section="Followers",
+     *  description="取得魅客列表",
      *  requirements={
      *      {
      *          "name"="userId",
@@ -34,7 +34,7 @@ class FriendController extends Controller
      *
      * @return JsonResponse
      */
-    public function friendListAction($userId)
+    public function followerListAction($userId)
     {
         $output = [
             'result' => 'ok',
@@ -49,15 +49,15 @@ class FriendController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friends/{friendId}",
-     *        name = "api_add_friend",
-     *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
+     * @Route("/user/{userId}/followers/{followerId}",
+     *        name = "api_follow",
+     *        requirements = {"userId" = "\d+", "followerId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"POST"})
      *
      * @ApiDoc(
-     *  section="Friends",
-     *  description="加魅友",
+     *  section="Followers",
+     *  description="關注",
      *  requirements={
      *      {
      *          "name"="userId",
@@ -66,21 +66,21 @@ class FriendController extends Controller
      *          "description"="會員編號"
      *      },
      *      {
-     *          "name"="friendId",
+     *          "name"="followerId",
      *          "dataType"="integer",
      *          "requirement"="\d+",
-     *          "description"="好友編號"
+     *          "description"="關注會員編號"
      *      }
      *  })
      *
      * @return JsonResponse
      */
-    public function addFriendAction($userId, $friendId)
+    public function followAction($userId, $followerId)
     {
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
+                ['user_id' => $followerId, 'modified_time' => '2016-03-03 12:00:00']
             ]
         ];
 
@@ -88,15 +88,15 @@ class FriendController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friends/{friendId}",
-     *        name = "api_cancel_friend",
-     *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
+     * @Route("/user/{userId}/followers/{followerId}",
+     *        name = "api_user_cancel_follower",
+     *        requirements = {"userId" = "\d+", "followerId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"DELETE"})
      *
      * @ApiDoc(
-     *  section="Friends",
-     *  description="移除魅友",
+     *  section="Followers",
+     *  description="取消關注",
      *  requirements={
      *      {
      *          "name"="userId",
@@ -105,21 +105,21 @@ class FriendController extends Controller
      *          "description"="會員編號"
      *      },
      *      {
-     *          "name"="friendId",
+     *          "name"="followerId",
      *          "dataType"="integer",
      *          "requirement"="\d+",
-     *          "description"="好友編號"
+     *          "description"="取消關注會員編號"
      *      }
      *  })
      *
      * @return JsonResponse
      */
-    public function cancelFriendAction($userId, $friendId)
+    public function unFollowAction($userId, $followerId)
     {
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
+                ['user_id' => $followerId, 'modified_time' => '2016-03-03 12:00:00']
             ]
         ];
 
@@ -127,15 +127,15 @@ class FriendController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/friends_count",
-     *        name = "api_friend_count",
+     * @Route("/user/{userId}/followers_count",
+     *        name = "api_follower_count",
      *        requirements = {"userId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"GET"})
      *
      * @ApiDoc(
-     *  section="Friends",
-     *  description="取得魅友數量",
+     *  section="Followers",
+     *  description="取得魅客數量",
      *  requirements={
      *      {
      *          "name"="userId",
@@ -147,7 +147,7 @@ class FriendController extends Controller
      *
      * @return JsonResponse
      */
-    public function countFriendAction($userId)
+    public function countFollowerAction($userId)
     {
         $output = [
             'result' => 'ok',
