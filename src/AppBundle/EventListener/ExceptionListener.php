@@ -11,7 +11,7 @@ class ExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $content = json_encode(['message' => $exception->getMessage()]);
+        $content = json_encode(['result' => 'error', 'message' => $exception->getMessage()]);
 
         $response = new Response();
         $response->setContent($content);

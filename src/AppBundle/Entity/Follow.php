@@ -37,6 +37,16 @@ class Follow
      */
     private $isValid;
 
+    public function __construct($followerId, $followedId)
+    {
+        $now = new \DateTime();
+        $this->createdTime = $now;
+        $this->modifiedTime = $now;
+        $this->followerId = $followerId;
+        $this->followedId = $followedId;
+        $this->lastestEditor = $followerId;
+        $this->isValid = true;
+    }
 
     /**
      * Set followerId
@@ -107,7 +117,7 @@ class Follow
      */
     public function getCreatedTime()
     {
-        return $this->createdTime;
+        return $this->createdTime->format(\DateTime::ISO8601);
     }
 
     /**
@@ -131,7 +141,7 @@ class Follow
      */
     public function getModifiedTime()
     {
-        return $this->modifiedTime;
+        return $this->modifiedTime->format(\DateTime::ISO8601);
     }
 
     /**

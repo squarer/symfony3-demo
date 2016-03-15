@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use AppBundle\Entity\Follow;
 
 
 class FollowerController extends Controller
@@ -112,10 +113,32 @@ class FollowerController extends Controller
      */
     public function followAction($userId, $followedId)
     {
+        if ($userId == $followedId) {
+            throw new \InvalidArgumentException('Invalid argument');
+        }
+
+        $em = $this->getEntityManager();
+        $follow = $em->find('AppBundle:Follow',
+            ['followerId' => $userId, 'followedId' => $followedId]);
+
+        if (!$follow) {
+            $follow = new Follow($userId, $followedId);
+            $em->persist($follow);
+        }
+
+        if (!$follow->getIsValid()) {
+            $follow->setIsValid(true)
+                ->setModifiedTime(new \DateTime())
+                ->setLastestEditor($userId);
+        }
+
+        $em->flush();
+
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $followedId, 'modified_time' => '2016-03-03 12:00:00']
+                'user_id' => $follow->getFollowedId(),
+                'modified_time' => $follow->getModifiedTime()
             ]
         ];
 
@@ -225,5 +248,13 @@ class FollowerController extends Controller
         ];
 
         return new JsonResponse($output);
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    private function getEntityManager()
+    {
+        return $this->getDoctrine()->getManager();
     }
 }
