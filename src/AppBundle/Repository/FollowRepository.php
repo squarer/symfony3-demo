@@ -12,10 +12,11 @@ class FollowRepository extends EntityRepository
     /**
      * get followed list
      */
-    public function getFollowedList($followerId)
+    public function getFollowed($followerId)
     {
         $qb = $this->createQueryBuilder('f')
             ->where('f.followerId = :followerId')
+            ->andWhere('f.isValid = 1')
             ->setParameter('followerId', $followerId);
 
         $ret = [];
@@ -31,10 +32,11 @@ class FollowRepository extends EntityRepository
     /**
      * get fans list
      */
-    public function getFansList($followedId)
+    public function getFans($followedId)
     {
         $qb = $this->createQueryBuilder('f')
             ->where('f.followedId = :followedId')
+            ->andWhere('f.isValid = 1')
             ->setParameter('followedId', $followedId);
 
         $ret = [];
@@ -45,5 +47,33 @@ class FollowRepository extends EntityRepository
         }
 
         return $ret;
+    }
+
+    /**
+     * get followed count
+     */
+    public function countFollowed($followerId)
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('count(f.followedId)')
+            ->where('f.followerId = :followerId')
+            ->andWhere('f.isValid = 1')
+            ->setParameter('followerId', $followerId);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * get fans count
+     */
+    public function countFans($followedId)
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('count(f.followedId)')
+            ->where('f.followedId = :followedId')
+            ->andWhere('f.isValid = 1')
+            ->setParameter('followedId', $followedId);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

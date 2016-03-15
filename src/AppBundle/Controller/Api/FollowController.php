@@ -38,7 +38,7 @@ class FollowController extends Controller
     public function followedListAction($userId)
     {
         $em = $this->getEntityManager();
-        $list = $em->getRepository('AppBundle:Follow')->getFollowedList($userId);
+        $list = $em->getRepository('AppBundle:Follow')->getFollowed($userId);
 
         $output = [
             'result' => 'ok',
@@ -72,7 +72,7 @@ class FollowController extends Controller
     public function fanListAction($userId)
     {
         $em = $this->getEntityManager();
-        $list = $em->getRepository('AppBundle:Follow')->getFansList($userId);
+        $list = $em->getRepository('AppBundle:Follow')->getFans($userId);
 
         $output = [
             'result' => 'ok',
@@ -222,11 +222,12 @@ class FollowController extends Controller
      */
     public function countFollowedAction($userId)
     {
+        $em = $this->getEntityManager();
+        $count = $em->getRepository('AppBundle:Follow')->countFollowed($userId);
+
         $output = [
             'result' => 'ok',
-            'data' => [
-                ['count' => 20]
-            ]
+            'data' => ['count' => $count]
         ];
 
         return new JsonResponse($output);
@@ -255,11 +256,12 @@ class FollowController extends Controller
      */
     public function countFanAction($userId)
     {
+        $em = $this->getEntityManager();
+        $count = $em->getRepository('AppBundle:Follow')->countFans($userId);
+
         $output = [
             'result' => 'ok',
-            'data' => [
-                ['count' => 20]
-            ]
+            'data' => ['count' => $count]
         ];
 
         return new JsonResponse($output);
