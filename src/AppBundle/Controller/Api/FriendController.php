@@ -21,6 +21,7 @@ class FriendController extends Controller
      * @Method({"GET"})
      *
      * @ApiDoc(
+     *  section="Friends",
      *  description="取得魅友列表",
      *  requirements={
      *      {
@@ -55,6 +56,7 @@ class FriendController extends Controller
      * @Method({"POST"})
      *
      * @ApiDoc(
+     *  section="Friends",
      *  description="加魅友",
      *  requirements={
      *      {
@@ -93,6 +95,7 @@ class FriendController extends Controller
      * @Method({"DELETE"})
      *
      * @ApiDoc(
+     *  section="Friends",
      *  description="移除魅友",
      *  requirements={
      *      {
@@ -131,6 +134,7 @@ class FriendController extends Controller
      * @Method({"GET"})
      *
      * @ApiDoc(
+     *  section="Friends",
      *  description="取得魅友數量",
      *  requirements={
      *      {
