@@ -14,14 +14,14 @@ class FollowerController extends Controller
 {
 
     /**
-     * @Route("/user/{userId}/followers",
-     *        name = "api_follower_list",
+     * @Route("/user/{userId}/followed",
+     *        name = "api_followed_list",
      *        requirements = {"userId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"GET"})
      *
      * @ApiDoc(
-     *  section="Followers",
+     *  section="Follow",
      *  description="取得魅客列表",
      *  requirements={
      *      {
@@ -34,7 +34,7 @@ class FollowerController extends Controller
      *
      * @return JsonResponse
      */
-    public function followerListAction($userId)
+    public function followedListAction($userId)
     {
         $output = [
             'result' => 'ok',
@@ -49,14 +49,49 @@ class FollowerController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/follow/{followerId}",
+     * @Route("/user/{userId}/fans",
+     *        name = "api_fan_list",
+     *        requirements = {"userId" = "\d+", "_format" = "json"},
+     *        defaults = {"_format" = "json"})
+     * @Method({"GET"})
+     *
+     * @ApiDoc(
+     *  section="Follow",
+     *  description="取得魅粉列表",
+     *  requirements={
+     *      {
+     *          "name"="userId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="要操作的會員編號"
+     *      }
+     *  })
+     *
+     * @return JsonResponse
+     */
+    public function fanListAction($userId)
+    {
+        $output = [
+            'result' => 'ok',
+            'data' => [
+                ['user_id' => '12345678', 'modified_time' => '2016-03-01 12:00:00'],
+                ['user_id' => '13131312', 'modified_time' => '2016-03-02 12:00:00'],
+                ['user_id' => '14232424', 'modified_time' => '2016-03-03 12:00:00']
+            ]
+        ];
+
+        return new JsonResponse($output);
+    }
+
+    /**
+     * @Route("/user/{userId}/follow/{followedId}",
      *        name = "api_follow",
-     *        requirements = {"userId" = "\d+", "followerId" = "\d+", "_format" = "json"},
+     *        requirements = {"userId" = "\d+", "followedId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"POST"})
      *
      * @ApiDoc(
-     *  section="Followers",
+     *  section="Follow",
      *  description="關注",
      *  requirements={
      *      {
@@ -66,7 +101,7 @@ class FollowerController extends Controller
      *          "description"="會員編號"
      *      },
      *      {
-     *          "name"="followerId",
+     *          "name"="followedId",
      *          "dataType"="integer",
      *          "requirement"="\d+",
      *          "description"="關注會員編號"
@@ -75,12 +110,12 @@ class FollowerController extends Controller
      *
      * @return JsonResponse
      */
-    public function followAction($userId, $followerId)
+    public function followAction($userId, $followedId)
     {
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $followerId, 'modified_time' => '2016-03-03 12:00:00']
+                ['user_id' => $followedId, 'modified_time' => '2016-03-03 12:00:00']
             ]
         ];
 
@@ -88,14 +123,14 @@ class FollowerController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/follow/{followerId}",
+     * @Route("/user/{userId}/follow/{followedId}",
      *        name = "api_unfollow",
-     *        requirements = {"userId" = "\d+", "followerId" = "\d+", "_format" = "json"},
+     *        requirements = {"userId" = "\d+", "followedId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"DELETE"})
      *
      * @ApiDoc(
-     *  section="Followers",
+     *  section="Follow",
      *  description="取消關注",
      *  requirements={
      *      {
@@ -105,7 +140,7 @@ class FollowerController extends Controller
      *          "description"="會員編號"
      *      },
      *      {
-     *          "name"="followerId",
+     *          "name"="followedId",
      *          "dataType"="integer",
      *          "requirement"="\d+",
      *          "description"="取消關注會員編號"
@@ -114,12 +149,12 @@ class FollowerController extends Controller
      *
      * @return JsonResponse
      */
-    public function unFollowAction($userId, $followerId)
+    public function unFollowAction($userId, $followedId)
     {
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $followerId, 'modified_time' => '2016-03-03 12:00:00']
+                ['user_id' => $followedId, 'modified_time' => '2016-03-03 12:00:00']
             ]
         ];
 
@@ -127,14 +162,14 @@ class FollowerController extends Controller
     }
 
     /**
-     * @Route("/user/{userId}/followers_count",
-     *        name = "api_follower_count",
+     * @Route("/user/{userId}/followed_count",
+     *        name = "api_followed_count",
      *        requirements = {"userId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"GET"})
      *
      * @ApiDoc(
-     *  section="Followers",
+     *  section="Follow",
      *  description="取得魅客數量",
      *  requirements={
      *      {
@@ -147,7 +182,40 @@ class FollowerController extends Controller
      *
      * @return JsonResponse
      */
-    public function countFollowerAction($userId)
+    public function countFollowedAction($userId)
+    {
+        $output = [
+            'result' => 'ok',
+            'data' => [
+                ['count' => 20]
+            ]
+        ];
+
+        return new JsonResponse($output);
+    }
+
+    /**
+     * @Route("/user/{userId}/fans_count",
+     *        name = "api_fans_count",
+     *        requirements = {"userId" = "\d+", "_format" = "json"},
+     *        defaults = {"_format" = "json"})
+     * @Method({"GET"})
+     *
+     * @ApiDoc(
+     *  section="Follow",
+     *  description="取得魅粉數量",
+     *  requirements={
+     *      {
+     *          "name"="userId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="會員編號"
+     *      }
+     *  })
+     *
+     * @return JsonResponse
+     */
+    public function countFanAction($userId)
     {
         $output = [
             'result' => 'ok',

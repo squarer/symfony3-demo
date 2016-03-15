@@ -20,18 +20,6 @@ class FanController extends Controller
      *        defaults = {"_format" = "json"})
      * @Method({"GET"})
      *
-     * @ApiDoc(
-     *  section="Fans",
-     *  description="取得魅粉列表",
-     *  requirements={
-     *      {
-     *          "name"="userId",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="要操作的會員編號"
-     *      }
-     *  })
-     *
      * @return JsonResponse
      */
     public function fanListAction($userId)
@@ -55,24 +43,6 @@ class FanController extends Controller
      *        defaults = {"_format" = "json"})
      * @Method({"POST"})
      *
-     * @ApiDoc(
-     *  section="Fans",
-     *  description="收藏",
-     *  requirements={
-     *      {
-     *          "name"="userId",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="會員編號"
-     *      },
-     *      {
-     *          "name"="fanId",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="收藏會員編號"
-     *      }
-     *  })
-     *
      * @return JsonResponse
      */
     public function collectAction($userId, $fanId)
@@ -94,24 +64,6 @@ class FanController extends Controller
      *        defaults = {"_format" = "json"})
      * @Method({"DELETE"})
      *
-     * @ApiDoc(
-     *  section="Fans",
-     *  description="取消收藏",
-     *  requirements={
-     *      {
-     *          "name"="userId",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="會員編號"
-     *      },
-     *      {
-     *          "name"="fanId",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="取消收藏會員編號"
-     *      }
-     *  })
-     *
      * @return JsonResponse
      */
     public function unCollectAction($userId, $fanId)
@@ -132,18 +84,6 @@ class FanController extends Controller
      *        requirements = {"userId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"GET"})
-     *
-     * @ApiDoc(
-     *  section="Fans",
-     *  description="取得魅粉數量",
-     *  requirements={
-     *      {
-     *          "name"="userId",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="會員編號"
-     *      }
-     *  })
      *
      * @return JsonResponse
      */

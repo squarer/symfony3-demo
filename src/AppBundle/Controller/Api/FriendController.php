@@ -69,7 +69,7 @@ class FriendController extends Controller
      *          "name"="friendId",
      *          "dataType"="integer",
      *          "requirement"="\d+",
-     *          "description"="好友編號"
+     *          "description"="魅友編號"
      *      }
      *  })
      *
@@ -108,7 +108,7 @@ class FriendController extends Controller
      *          "name"="friendId",
      *          "dataType"="integer",
      *          "requirement"="\d+",
-     *          "description"="好友編號"
+     *          "description"="魅友編號"
      *      }
      *  })
      *
