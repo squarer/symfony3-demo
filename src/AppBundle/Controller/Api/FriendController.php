@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 
-class UserController extends Controller
+class FriendController extends Controller
 {
 
     /**
