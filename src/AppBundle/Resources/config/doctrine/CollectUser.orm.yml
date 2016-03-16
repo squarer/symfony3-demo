@@ -1,6 +1,7 @@
 AppBundle\Entity\CollectUser:
     type: entity
     table: collect_user
+    repositoryClass: AppBundle\Repository\CollectUserRepository
     id:
         userId:
             type: bigint

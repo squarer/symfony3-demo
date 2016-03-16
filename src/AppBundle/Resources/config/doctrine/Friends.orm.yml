@@ -1,29 +1,23 @@
 AppBundle\Entity\Friends:
     type: entity
     table: friends
+    repositoryClass: AppBundle\Repository\FriendsRepository
     id:
-        objectId:
-            type: bigint
-            nullable: false
-            options:
-                unsigned: false
-            id: true
-            column: object_id
-            generator:
-                strategy: IDENTITY
-    fields:
         userOneId:
             type: bigint
             nullable: false
             options:
                 unsigned: false
+            id: true
             column: user_one_id
         userTwoId:
             type: bigint
             nullable: false
             options:
                 unsigned: false
+            id: true
             column: user_two_id
+    fields:
         actionUserId:
             type: bigint
             nullable: false

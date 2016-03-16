@@ -8,9 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use AppBundle\Entity\Friends;
 
 
-class FriendController extends Controller
+class FriendsController extends Controller
 {
 
     /**
@@ -50,14 +51,14 @@ class FriendController extends Controller
 
     /**
      * @Route("/user/{userId}/friends/{friendId}",
-     *        name = "api_add_friend",
+     *        name = "api_invite_friend",
      *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
      * @Method({"POST"})
      *
      * @ApiDoc(
      *  section="Friends",
-     *  description="加魅友",
+     *  description="邀請加魅友",
      *  requirements={
      *      {
      *          "name"="userId",
@@ -75,12 +76,43 @@ class FriendController extends Controller
      *
      * @return JsonResponse
      */
-    public function addFriendAction($userId, $friendId)
+    public function inviteAction($userId, $friendId)
     {
+        if ($userId == $friendId) {
+            throw new \InvalidArgumentException('Invalid argument');
+        }
+
+        $userOneId = $this->getUserId($userId, $friendId);
+        $userTwoId = $this->getUserId($userId, $friendId, false);
+
+        $em = $this->getEntityManager();
+        $friends = $em->find('AppBundle:Friends',
+            ['userOneId' => $userOneId, 'userTwoId' => $userTwoId]);
+
+        if (!$friends) {
+            $friends = new friends($userOneId, $userTwoId, $userId);
+            $em->persist($friends);
+        }
+
+        if ($friends->getStatus() === Friends::STATUS_PENDING) {
+            throw new \RuntimeException('Request User have been invited');
+        }
+
+        if ($friends->getStatus() == Friends::STATUS_ACCEPTED) {
+            throw new \RuntimeException('Being friends already');
+        }
+
+        $friends->setStatus(Friends::STATUS_PENDING)
+            ->setModifiedTime(new \DateTime())
+            ->setLastestEditor($userId);
+
+        $em->flush();
+
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
+                'user_id' => $friendId,
+                'modified_time' => $friends->getModifiedTime()
             ]
         ];
 
@@ -89,14 +121,14 @@ class FriendController extends Controller
 
     /**
      * @Route("/user/{userId}/friends/{friendId}",
-     *        name = "api_cancel_friend",
+     *        name = "api_accept_friend",
      *        requirements = {"userId" = "\d+", "friendId" = "\d+", "_format" = "json"},
      *        defaults = {"_format" = "json"})
-     * @Method({"DELETE"})
+     * @Method({"PUT"})
      *
      * @ApiDoc(
      *  section="Friends",
-     *  description="移除魅友",
+     *  description="接受加魅友",
      *  requirements={
      *      {
      *          "name"="userId",
@@ -114,16 +146,43 @@ class FriendController extends Controller
      *
      * @return JsonResponse
      */
-    public function cancelFriendAction($userId, $friendId)
+    public function acceptAction($userId, $friendId)
     {
+        if ($userId == $friendId) {
+            throw new \InvalidArgumentException('Invalid argument');
+        }
+
+        $userOneId = $this->getUserId($userId, $friendId);
+        $userTwoId = $this->getUserId($userId, $friendId, false);
+
+        $em = $this->getEntityManager();
+        $friends = $em->getRepository('AppBundle:Friends')->findOneBy([
+            'userOneId' => $userOneId,
+            'userTwoId' => $userTwoId,
+            'status' => Friends::STATUS_PENDING
+        ]);
+
+        if (!$friends) {
+            throw new \RuntimeException('No invitation found');
+        }
+
+        $friends->setStatus(Friends::STATUS_ACCEPTED)
+            ->setActionUserId($userId)
+            ->setLastestEditor($userId)
+            ->setModifiedTime(new \DateTime());
+
+        $em->flush();
+
         $output = [
             'result' => 'ok',
             'data' => [
-                ['user_id' => $friendId, 'modified_time' => '2016-03-03 12:00:00']
+                'user_id' => $friendId,
+                'modified_time' => $friends->getModifiedTime()
             ]
         ];
 
         return new JsonResponse($output);
+
     }
 
     /**
@@ -157,5 +216,25 @@ class FriendController extends Controller
         ];
 
         return new JsonResponse($output);
+    }
+
+    /**
+     * get user one/two id
+     */
+    private function getUserId($user1, $user2, $one = true)
+    {
+        if ($one) {
+            return $user1 < $user2 ? $user1 : $user2;
+        }
+
+        return $user1 > $user2 ? $user1 : $user2;
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    private function getEntityManager()
+    {
+        return $this->getDoctrine()->getManager();
     }
 }

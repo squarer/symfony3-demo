@@ -4,13 +4,35 @@ namespace AppBundle\Entity;
 
 /**
  * Friends
+ *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FriendsRepository")
  */
 class Friends
 {
     /**
-     * @var integer
+     * 等待中
      */
-    private $objectId;
+    const STATUS_PENDING = 0;
+
+    /**
+     * 已接受邀請
+     */
+    const STATUS_ACCEPTED = 1;
+
+    /**
+     * 已拒絕邀請
+     */
+    const STATUS_DECLINED = 2;
+
+    /**
+     * 已封鎖
+     */
+    const STATUS_BLOCKED = 3;
+
+    /**
+     * 初始狀態
+     */
+    const STATUS_INIT = 9;
 
     /**
      * @var integer
@@ -28,7 +50,7 @@ class Friends
     private $actionUserId;
 
     /**
-     * @var boolean
+     * @var integer
      */
     private $status;
 
@@ -52,15 +74,17 @@ class Friends
      */
     private $isValid;
 
-
-    /**
-     * Get objectId
-     *
-     * @return integer
-     */
-    public function getObjectId()
+    public function __construct($userOneId, $userTwoId, $actionUserId)
     {
-        return $this->objectId;
+        $now = new \DateTime();
+        $this->createdTime = $now;
+        $this->modifiedTime = $now;
+        $this->userOneId = $userOneId;
+        $this->userTwoId = $userTwoId;
+        $this->actionUserId = $actionUserId;
+        $this->lastestEditor = $actionUserId;
+        $this->isValid = true;
+        $this->status = self::STATUS_INIT;
     }
 
     /**
@@ -138,7 +162,7 @@ class Friends
     /**
      * Set status
      *
-     * @param boolean $status
+     * @param integer $status
      *
      * @return Friends
      */
@@ -152,7 +176,7 @@ class Friends
     /**
      * Get status
      *
-     * @return boolean
+     * @return integer
      */
     public function getStatus()
     {
@@ -180,7 +204,7 @@ class Friends
      */
     public function getCreatedTime()
     {
-        return $this->createdTime;
+        return $this->createdTime->format(\DateTime::ISO8601);
     }
 
     /**
@@ -204,7 +228,7 @@ class Friends
      */
     public function getModifiedTime()
     {
-        return $this->modifiedTime;
+        return $this->modifiedTime->format(\DateTime::ISO8601);
     }
 
     /**
@@ -253,5 +277,19 @@ class Friends
     public function getIsValid()
     {
         return $this->isValid;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'user_one_id' => $this->getUserOneId(),
+            'user_two_id' => $this->getUserTwoId(),
+            'action_user_id' => $this->getActionUserId(),
+            'status' => $this->getStatus(),
+            'modified_time' => $this->getModifiedTime()
+        ];
     }
 }
