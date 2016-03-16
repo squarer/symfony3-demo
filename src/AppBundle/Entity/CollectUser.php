@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 /**
  * CollectUser
+ *å
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CollectUserRepository")
  */
 class CollectUser
 {
@@ -37,6 +39,16 @@ class CollectUser
      */
     private $isValid;
 
+    public function __construct($userId, $collectUserId)
+    {
+        $now = new \DateTime();
+        $this->createdTime = $now;
+        $this->modifiedTime = $now;
+        $this->userId = $userId;
+        $this->collectUserId = $collectUserId;
+        $this->lastestEditor = $userId;
+        $this->isValid = true;
+    }
 
     /**
      * Set userId
@@ -107,7 +119,7 @@ class CollectUser
      */
     public function getCreatedTime()
     {
-        return $this->createdTime;
+        return $this->createdTime->format(\DateTime::ISO8601);
     }
 
     /**
@@ -131,7 +143,7 @@ class CollectUser
      */
     public function getModifiedTime()
     {
-        return $this->modifiedTime;
+        return $this->modifiedTime->format(\DateTime::ISO8601);
     }
 
     /**
@@ -180,5 +192,17 @@ class CollectUser
     public function getIsValid()
     {
         return $this->isValid;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'user_id' => $this->getUserId(),
+            'collect_user_id' => $this->getCollectUserId(),
+            'modified_time' => $this->getModifiedTime()
+        ];
     }
 }
