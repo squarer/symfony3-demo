@@ -23,8 +23,12 @@
 
     function logInWithFacebook() {
       FB.login(function(response) {
-        var url = "{{ path('callback') }}";
-        window.location.replace(url);
+        if (response.status === 'connected') {
+          var url = "{{ path('callback') }}";
+          window.location.replace(url);
+        } else {
+          $('#fbLogin').button('reset');
+        }
       }, {scope: 'email'});
     }
 
