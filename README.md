@@ -22,4 +22,4 @@ get coverage report
 $ phpunit --coverage-html=path/to/coverage tests/
 ```
 
-### [Demo](http://52.25.204.72/)
+### [Demo](http://52.39.102.96:8080/)
